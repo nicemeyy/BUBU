@@ -15,6 +15,8 @@
 #import "BBMovieList.h"
 #import "BBMovieDetialController.h"
 #import "UIViewController+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "BBMapViewController.h"
 
 @interface BBMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -48,8 +50,16 @@
     }
     [self.view addSubview:_tableView];
     
-    
-    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(mapClick) title:@"影院"];
+}
+
+- (void)mapClick
+{
+    BBMapViewController *mapVC = [[BBMapViewController alloc] init];
+    mapVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:mapVC animated:YES completion:^{
+        
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

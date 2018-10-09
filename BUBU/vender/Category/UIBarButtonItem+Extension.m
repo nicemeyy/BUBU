@@ -59,14 +59,14 @@
     // 设置文字
     [btn setTitle:title forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
+    [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
     // 设置尺寸
     CGRect frame;
     frame = btn.frame;
     frame.size.height = 30;
-    frame.size.width = 80;
+    frame.size.width = 60;
     btn.frame = frame;
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
 }

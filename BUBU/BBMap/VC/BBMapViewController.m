@@ -287,8 +287,10 @@
 #pragma mark -
 - (void)navGaode
 {
+    //iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%f&slon=%f&sname=A&did=BGVIS2&dlat=%f&dlon=%f&dname=B&dev=0&t=0
+//    iosamap://navi?sourceApplication=applicationName&poiname=fangheng&poiid=BGVIS&lat=36.547901&lon=104.258354&dev=1&style=2
     //导航
-    NSURL *appURL = [NSURL URLWithString:[NSString stringWithFormat:@"iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%f&slon=%f&sname=A&did=BGVIS2&dlat=%f&dlon=%f&dname=B&dev=0&t=0",self.selectedAnnotationView.annotation.coordinate.latitude,self.selectedAnnotationView.annotation.coordinate.longitude,self.locationCoordinate.latitude,self.locationCoordinate.longitude]];
+    NSURL *appURL = [NSURL URLWithString:[NSString stringWithFormat:@"iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%f&slon=%f&sname=A&did=BGVIS2&dlat=%f&dlon=%F&dname=B&dev=0&t=0",self.locationCoordinate.latitude,self.locationCoordinate.longitude,self.selectedAnnotationView.annotation.coordinate.latitude,self.selectedAnnotationView.annotation.coordinate.longitude]];
     //路线规划
     //                                                            iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=39.92848272&slon=116.39560823&sname=A&did=BGVIS2&dlat=39.98848272&dlon=116.47560823&dname=B&dev=0&t=0
     if ([[UIApplication sharedApplication] canOpenURL:appURL])

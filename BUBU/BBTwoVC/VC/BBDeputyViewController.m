@@ -28,7 +28,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.title = @"我的";
+    self.title = @"推荐";
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, KIsiPhoneX?88:64, self.view.bounds.size.width, KIsiPhoneX?(self.view.bounds.size.height - 88 - 64):((self.view.bounds.size.height - 64 - 44)))];
     _tableView.backgroundColor = [UIColor clearColor];

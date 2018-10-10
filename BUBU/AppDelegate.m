@@ -10,11 +10,10 @@
 #import "ViewController.h"
 #import "BBMainViewController.h"
 #import "BBDeputyViewController.h"
-#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 @interface AppDelegate ()
 {
-    BMKMapManager* _mapManager;
 }
 @end
 
@@ -23,13 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    _mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
-    BOOL ret = [_mapManager start:@"GoNyxwvhTGCNnIthxhFNvzPTfdREoUI1"  generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }  
-    
+   [AMapServices sharedServices].apiKey = @"38748979dd8306129618d948ee690436";
+    [[AMapServices sharedServices] setEnableHTTPS:YES];
     UITabBarController *vc = [[UITabBarController alloc] init];
     [self initTabBar:vc];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:vc];

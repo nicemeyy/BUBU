@@ -9,11 +9,26 @@
 
 
 #import "BBMapViewController.h"
-#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
-#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
-#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
+#import <MAMapKit/MAMapKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import "MALocationAnnotation.h"
+#import "MALocationAnnotationView.h"
+#import "POIAnnotation.h"
 
-@interface BBMapViewController ()
+@interface BBMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,AMapLocationManagerDelegate>
+
+@property (nonatomic, strong) AMapSearchAPI *search;
+
+@property (nonatomic, strong) MAMapView                   *mapView;
+@property (nonatomic, copy)   AMapLocatingCompletionBlock completionBlock;
+@property (nonatomic, strong) AMapLocationManager         *locationManager;
+@property (nonatomic, assign) CLLocationCoordinate2D      locationCoordinate;
+
+@property (nonatomic, strong) NSDictionary                 *locationDic;
+
+@property (nonatomic, strong) MALocationAnnotation            *locAnnotation;
 
 @end
 
@@ -25,8 +40,18 @@
     self.title = @"影院";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    BMKMapView* mapView = [[BMKMapView alloc]initWithFrame:self.view.bounds];
-    self.view = mapView;
+    ///地图需要v4.5.0及以上版本才必须要打开此选项（v4.5.0以下版本，需要手动配置info.plist）
+    [AMapServices sharedServices].enableHTTPS = YES;
+    
+    ///初始化地图
+    _mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
+    _mapView.delegate = self;
+    ///把地图添加至view
+    [self.view addSubview:_mapView];
+    
+    ///如果您需要进入地图就显示定位小蓝点，则需要下面两行代码
+//    _mapView.showsUserLocation = YES;
+//    _mapView.userTrackingMode = MAUserTrackingModeFollow;
     
     UIButton  *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 44, KIsiPhoneX?88-37:64-37, 30, 30)];
     [button setImage:[UIImage imageNamed:@"icon_remove"] forState:UIControlStateNormal];
@@ -34,7 +59,8 @@
     [button addTarget:self action:@selector(butClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
-    
+    self.search = [[AMapSearchAPI alloc] init];
+    self.search.delegate = self;
     
 }
 
@@ -43,5 +69,185 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    [self configLocationManager];
+    
+    _mapView.centerCoordinate = _locationCoordinate;
+}
+
+/* 根据中心点坐标来搜周边的POI. */
+- (void)searchPoiByCenterCoordinate
+{
+    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
+    
+    request.location            = [AMapGeoPoint locationWithLatitude:_locationCoordinate.latitude longitude:_locationCoordinate.longitude];
+    request.keywords            = @"电影院";
+    /* 按照距离排序. */
+    request.sortrule            = 0;
+    request.requireExtension    = YES;
+    
+    [self.search AMapPOIAroundSearch:request];
+}
+#pragma mark - 定位
+//开启定位
+- (void)configLocationManager
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    //设置期望定位精度
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [self.locationManager setLocatingWithReGeocode:YES];
+    [self.locationManager startUpdatingLocation];
+
+}
+
+
+#pragma mark - annotation相关
+//添加标注(annotation)信息
+- (void)addAnnotationToMapView:(id<MAAnnotation>)annotation
+{
+    [self.mapView addAnnotation:annotation];
+    
+    [self.mapView selectAnnotation:annotation animated:YES];
+    [self.mapView setZoomLevel:15.1 animated:NO];
+    [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+}
+
+//添加bike annotation
+-(void)addBikeAnnotationWithCoordinate:(CLLocationCoordinate2D)coordinate bikeDic:(NSDictionary *)dic
+{
+    
+    self.locAnnotation = [[MALocationAnnotation alloc] init];
+    self.locAnnotation.coordinate   = coordinate;
+    self.locAnnotation.title        = [dic valueForKey:@"district"];
+    
+    [self addAnnotationToMapView:self.locAnnotation];
+    
+}
+
+#pragma mark - 根据coordinate 做逆地理编码的的搜索
+- (void)searchReGeocodeWithCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    
+    regeo.location                    = [AMapGeoPoint locationWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    regeo.requireExtension            = YES;
+    
+    [self.search AMapReGoecodeSearch:regeo];
+}
+
+#pragma mark - 地图代理方法
+//添加annotation是调用
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
+{
+    //定位annotation
+    if ([annotation isKindOfClass:[MALocationAnnotation class]]) {
+        
+        static NSString *userLocationStyleReuseIndetifier = @"userLocationStyleReuseIndetifier";
+        MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndetifier];
+        if (annotationView == nil)
+        {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
+                                                          reuseIdentifier:userLocationStyleReuseIndetifier];
+        }
+        
+        annotationView.image = [UIImage imageNamed:@"user_location_white"];
+        annotationView.canShowCallout = YES;
+        annotationView.draggable = YES;
+        annotationView.selected = YES;
+        
+        return annotationView;
+    }if ([annotation isKindOfClass:[POIAnnotation class]]) {
+        
+        static NSString *userLocationStyleReuseIndetifier = @"userBikeStyleReuseIndetifier";
+        MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndetifier];
+        if (annotationView == nil)
+        {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
+                                                          reuseIdentifier:userLocationStyleReuseIndetifier];
+        }
+        
+        annotationView.image = [UIImage imageNamed:@"icon_location_white"];
+        annotationView.canShowCallout = YES;
+        annotationView.draggable = YES;
+        annotationView.selected = YES;
+        
+        return annotationView;
+    }
+    
+    return nil;
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
+{
+    //定位错误
+    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
+{
+    //定位结果
+    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    _locationCoordinate = CLLocationCoordinate2DMake(location.coordinate.latitude,location.coordinate.longitude);
+    //停止定位
+    [self.locationManager stopUpdatingLocation];
+    [self searchReGeocodeWithCoordinate:_locationCoordinate];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    //根据定位信息，添加annotation
+    MALocationAnnotation *annotation = [[MALocationAnnotation alloc] init];
+    [annotation setCoordinate:location.coordinate];
+    [self addAnnotationToMapView:annotation];
+    
+    [self searchPoiByCenterCoordinate];
+}
+
+/* 逆地理编码回调. */
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    _locationDic = @{
+                         @"region":response.regeocode.addressComponent.province,
+                         @"district":response.regeocode.formattedAddress,
+                         @"latitude":[NSString stringWithFormat:@"%f",_locationCoordinate.latitude],
+                         @"longitude":[NSString stringWithFormat:@"%f",_locationCoordinate.longitude],
+                         @"page":@"1"};
+    //添加车的位子
+    [self addBikeAnnotationWithCoordinate:_locationCoordinate bikeDic:_locationDic];
+    
+}
+
+#pragma mark - AMapSearchDelegate
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+//    NSLog(@"Error: %@ - %@", error, [ErrorInfoUtility errorDescriptionWithCode:error.code]);
+}
+
+/* POI 搜索回调. */
+- (void)onPOISearchDone:(AMapPOISearchBaseRequest *)request response:(AMapPOISearchResponse *)response
+{
+    if (response.pois.count == 0)
+    {
+        return;
+    }
+    
+    NSMutableArray *poiAnnotations = [NSMutableArray arrayWithCapacity:response.pois.count];
+    
+    [response.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
+        [poiAnnotations addObject:[[POIAnnotation alloc] initWithPOI:obj]];
+        
+    }];
+    
+    /* 将结果以annotation的形式加载到地图上. */
+//    [self.mapView addAnnotations:poiAnnotations];
+    for (POIAnnotation *ann in poiAnnotations) {
+        [self addAnnotationToMapView:ann];
+    }
+    _mapView.centerCoordinate = _locationCoordinate;
+
+}
 
 @end

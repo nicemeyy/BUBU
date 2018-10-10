@@ -92,6 +92,7 @@
     request.keywords            = @"电影院";
     /* 按照距离排序. */
     request.sortrule            = 0;
+    request.radius              = 50000;
     request.requireExtension    = YES;
     
     [self.search AMapPOIAroundSearch:request];

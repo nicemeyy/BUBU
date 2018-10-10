@@ -50,13 +50,15 @@
 		B596BF69216CDEB00018CEB6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF68216CDEB00018CEB6 /* libz.tbd */; };
 		B596BF6D216CDFF50018CEB6 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B596BF6C216CDFF50018CEB6 /* AMap.bundle */; };
 		B596BF74216CE2820018CEB6 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF72216CE2810018CEB6 /* AMapFoundationKit.framework */; };
-		B596BF75216CE2820018CEB6 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF73216CE2810018CEB6 /* AMapLocationKit.framework */; };
-		B596BF7D216CE45C0018CEB6 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF7C216CE45C0018CEB6 /* MAMapKit.framework */; };
 		B596BF7F216D8EF80018CEB6 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF7E216D8EF70018CEB6 /* AMapSearchKit.framework */; };
 		B596BF84216D99D00018CEB6 /* MALocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF82216D99D00018CEB6 /* MALocationAnnotation.m */; };
 		B596BF87216D99DC0018CEB6 /* MALocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF86216D99DC0018CEB6 /* MALocationAnnotationView.m */; };
 		B596BF8A216DA4480018CEB6 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF89216DA4480018CEB6 /* POIAnnotation.m */; };
 		B596BF8D216DB9EC0018CEB6 /* YDCelloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF8B216DB9EC0018CEB6 /* YDCelloutView.m */; };
+		B596BF8F216DEA320018CEB6 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF8E216DEA320018CEB6 /* MAMapKit.framework */; };
+		B596BF91216DEA5C0018CEB6 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF90216DEA5B0018CEB6 /* AMapLocationKit.framework */; };
+		B596BF9C216DEE1F0018CEB6 /* lounchImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B596BF9A216DEE1E0018CEB6 /* lounchImage@3x.png */; };
+		B596BF9D216DEE1F0018CEB6 /* lounchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B596BF9B216DEE1E0018CEB6 /* lounchImage@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,9 +119,7 @@
 		B596BF68216CDEB00018CEB6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B596BF6C216CDFF50018CEB6 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		B596BF72216CE2810018CEB6 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
-		B596BF73216CE2810018CEB6 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
 		B596BF76216CE3580018CEB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		B596BF7C216CE45C0018CEB6 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		B596BF7E216D8EF70018CEB6 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		B596BF82216D99D00018CEB6 /* MALocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MALocationAnnotation.m; sourceTree = "<group>"; };
 		B596BF83216D99D00018CEB6 /* MALocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MALocationAnnotation.h; sourceTree = "<group>"; };
@@ -129,6 +129,10 @@
 		B596BF89216DA4480018CEB6 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
 		B596BF8B216DB9EC0018CEB6 /* YDCelloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDCelloutView.m; sourceTree = "<group>"; };
 		B596BF8C216DB9EC0018CEB6 /* YDCelloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDCelloutView.h; sourceTree = "<group>"; };
+		B596BF8E216DEA320018CEB6 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
+		B596BF90216DEA5B0018CEB6 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
+		B596BF9A216DEE1E0018CEB6 /* lounchImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lounchImage@3x.png"; sourceTree = "<group>"; };
+		B596BF9B216DEE1E0018CEB6 /* lounchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lounchImage@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,7 @@
 				B596BF67216CDEA50018CEB6 /* ExternalAccessory.framework in Frameworks */,
 				B596BF65216CDE9A0018CEB6 /* JavaScriptCore.framework in Frameworks */,
 				B596BF63216CDE8E0018CEB6 /* AdSupport.framework in Frameworks */,
+				B596BF91216DEA5C0018CEB6 /* AMapLocationKit.framework in Frameworks */,
 				B596BF31216CC4100018CEB6 /* CoreTelephony.framework in Frameworks */,
 				B596BF23216CC3A90018CEB6 /* CoreLocation.framework in Frameworks */,
 				B596BF7F216D8EF80018CEB6 /* AMapSearchKit.framework in Frameworks */,
@@ -150,12 +155,11 @@
 				B596BF61216CDE4D0018CEB6 /* Foundation.framework in Frameworks */,
 				B596BF5F216CDE400018CEB6 /* UIKit.framework in Frameworks */,
 				B596BF27216CC3BE0018CEB6 /* OpenGLES.framework in Frameworks */,
+				B596BF8F216DEA320018CEB6 /* MAMapKit.framework in Frameworks */,
 				B596BF5D216CDE100018CEB6 /* GLKit.framework in Frameworks */,
-				B596BF7D216CE45C0018CEB6 /* MAMapKit.framework in Frameworks */,
 				B596BF2F216CC4060018CEB6 /* libsqlite3.0.tbd in Frameworks */,
 				B596BF2D216CC3F90018CEB6 /* Security.framework in Frameworks */,
 				B596BF29216CC3CA0018CEB6 /* SystemConfiguration.framework in Frameworks */,
-				B596BF75216CE2820018CEB6 /* AMapLocationKit.framework in Frameworks */,
 				B596BF21216CC39D0018CEB6 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +271,8 @@
 		B596BED3216B82280018CEB6 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				B596BF9B216DEE1E0018CEB6 /* lounchImage@2x.png */,
+				B596BF9A216DEE1E0018CEB6 /* lounchImage@3x.png */,
 				B596BED5216B84280018CEB6 /* img_01.png */,
 				B596BED6216B84280018CEB6 /* img_02.png */,
 				B596BED4216B84280018CEB6 /* img_03.png */,
@@ -327,10 +333,10 @@
 		B596BF10216CB7B20018CEB6 /* mapKit */ = {
 			isa = PBXGroup;
 			children = (
+				B596BF90216DEA5B0018CEB6 /* AMapLocationKit.framework */,
+				B596BF8E216DEA320018CEB6 /* MAMapKit.framework */,
 				B596BF7E216D8EF70018CEB6 /* AMapSearchKit.framework */,
-				B596BF7C216CE45C0018CEB6 /* MAMapKit.framework */,
 				B596BF72216CE2810018CEB6 /* AMapFoundationKit.framework */,
-				B596BF73216CE2810018CEB6 /* AMapLocationKit.framework */,
 			);
 			path = mapKit;
 			sourceTree = "<group>";
@@ -451,8 +457,10 @@
 				B596BE8D216B34720018CEB6 /* LaunchScreen.storyboard in Resources */,
 				B596BED2216B82230018CEB6 /* tabbar_profile@3x.png in Resources */,
 				B596BF6D216CDFF50018CEB6 /* AMap.bundle in Resources */,
+				B596BF9D216DEE1F0018CEB6 /* lounchImage@2x.png in Resources */,
 				B596BED1216B82230018CEB6 /* tabbar_profile_selected@3x.png in Resources */,
 				B596BED7216B84280018CEB6 /* img_03.png in Resources */,
+				B596BF9C216DEE1F0018CEB6 /* lounchImage@3x.png in Resources */,
 				B596BECE216B81F90018CEB6 /* tabbar_home_selected@3x.png in Resources */,
 				B596BE8A216B34720018CEB6 /* Assets.xcassets in Resources */,
 				B596BE88216B34700018CEB6 /* Main.storyboard in Resources */,

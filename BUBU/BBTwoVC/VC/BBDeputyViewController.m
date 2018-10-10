@@ -13,6 +13,8 @@
 #import "BBMovieDetialCell.h"
 #import "BBDeputyList.h"
 #import "BBMovieDetialController.h"
+#import "UIBarButtonItem+Extension.h"
+#import "BBMapViewController.h"
 
 @interface BBDeputyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -45,6 +47,17 @@
         _tableView.cellLayoutMarginsFollowReadableWidth = NO;
     }
     [self.view addSubview:_tableView];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(mapClick) title:@"观影"];
+}
+
+- (void)mapClick
+{
+    BBMapViewController *mapVC = [[BBMapViewController alloc] init];
+    mapVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:mapVC animated:YES completion:^{
+        
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

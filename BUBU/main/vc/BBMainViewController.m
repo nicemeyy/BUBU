@@ -50,7 +50,7 @@
     }
     [self.view addSubview:_tableView];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(mapClick) title:@"影院"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(mapClick) title:@"观影"];
 }
 
 - (void)mapClick

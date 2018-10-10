@@ -16,6 +16,7 @@
 #import "MALocationAnnotation.h"
 #import "MALocationAnnotationView.h"
 #import "POIAnnotation.h"
+#import "YDCelloutView.h"
 
 @interface BBMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,AMapLocationManagerDelegate>
 
@@ -29,6 +30,9 @@
 @property (nonatomic, strong) NSDictionary                 *locationDic;
 
 @property (nonatomic, strong) MALocationAnnotation            *locAnnotation;
+
+@property (nonatomic, strong) YDCelloutView *calloutView;
+@property (nonatomic, strong) MAAnnotationView  *selectedAnnotationView;
 
 @end
 
@@ -53,9 +57,10 @@
 //    _mapView.showsUserLocation = YES;
 //    _mapView.userTrackingMode = MAUserTrackingModeFollow;
     
-    UIButton  *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 44, KIsiPhoneX?88-37:64-37, 30, 30)];
-    [button setImage:[UIImage imageNamed:@"icon_remove"] forState:UIControlStateNormal];
+    UIButton  *button = [[UIButton alloc] initWithFrame:CGRectMake(7, KIsiPhoneX?88-37:64-37, 30, 30)];
+    [button setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor redColor];
+    button.layer.cornerRadius = 15;
     [button addTarget:self action:@selector(butClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
@@ -175,7 +180,7 @@
         annotationView.image = [UIImage imageNamed:@"icon_location_white"];
         annotationView.canShowCallout = YES;
         annotationView.draggable = YES;
-        annotationView.selected = YES;
+        annotationView.selected = NO;
         
         return annotationView;
     }
@@ -247,7 +252,107 @@
         [self addAnnotationToMapView:ann];
     }
     _mapView.centerCoordinate = _locationCoordinate;
+}
 
+#pragma mark 点击站点弹出气泡
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
+{
+    _selectedAnnotationView = view;
+    if ([_selectedAnnotationView.annotation isKindOfClass:[POIAnnotation class]]) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"导航地图选择",nil)
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* baiduAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"百度地图", nil) style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action) {
+                                                                [self navBaidu];
+                                                            }];
+        UIAlertAction* gaodeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"高德地图", nil) style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action) {
+                                                                
+                                                                [self navGaode];
+                                                            }];
+        
+        UIAlertAction* canaelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * action) {
+                                                                 //响应事件
+                                                             }];
+        [alert addAction:baiduAction];
+        [alert addAction:gaodeAction];
+        [alert addAction:canaelAction];
+        [[self appRootViewController] presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+#pragma mark -
+- (void)navGaode
+{
+    //导航
+    NSURL *appURL = [NSURL URLWithString:[NSString stringWithFormat:@"iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%f&slon=%f&sname=A&did=BGVIS2&dlat=%f&dlon=%f&dname=B&dev=0&t=0",self.selectedAnnotationView.annotation.coordinate.latitude,self.selectedAnnotationView.annotation.coordinate.longitude,self.locationCoordinate.latitude,self.locationCoordinate.longitude]];
+    //路线规划
+    //                                                            iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=39.92848272&slon=116.39560823&sname=A&did=BGVIS2&dlat=39.98848272&dlon=116.47560823&dname=B&dev=0&t=0
+    if ([[UIApplication sharedApplication] canOpenURL:appURL])
+    {
+        [[UIApplication sharedApplication] openURL:appURL options:@{} completionHandler:nil];
+    }
+    else
+    {
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"未安装高德地图", nil) preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        
+        [controller addAction:okAction];
+        
+        [self.appRootViewController presentViewController:controller animated:YES completion:nil];
+        
+    }
+}
+
+- (void)navBaidu
+{
+    CLLocationCoordinate2D baiduBikelocationCoordinate = [self getBaiDuCoordinateByGaoDeCoordinate:self.selectedAnnotationView.annotation.coordinate];
+    CLLocationCoordinate2D baidulocationCoordinate = [self getBaiDuCoordinateByGaoDeCoordinate:self.locationCoordinate];
+    
+    NSURL *appURL = [NSURL URLWithString:[NSString stringWithFormat:@"baidumap://map/direction?origin=%f,%f&destination=%f,%f&mode=driving&src=webapp.navi.yourCompanyName.yourAppName",baiduBikelocationCoordinate.latitude,baiduBikelocationCoordinate.longitude,baidulocationCoordinate.latitude,baidulocationCoordinate.longitude]];
+    if ([[UIApplication sharedApplication] canOpenURL:appURL])
+    {
+        [[UIApplication sharedApplication] openURL:appURL options:@{} completionHandler:nil];
+    }
+    else
+    {
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"未安装百度地图", nil) preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        
+        [controller addAction:okAction];
+        
+        [self.appRootViewController presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+//获取顶层视图
+- (UIViewController *)appRootViewController
+{
+    UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *topVC = appRootVC;
+    while (topVC.presentedViewController)
+    {
+        topVC = topVC.presentedViewController;
+    }
+    return topVC;
+}
+
+// 高德地图经纬度转换为百度地图经纬度
+- (CLLocationCoordinate2D)getBaiDuCoordinateByGaoDeCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    return CLLocationCoordinate2DMake(coordinate.latitude + 0.006, coordinate.longitude + 0.0065);
 }
 
 @end

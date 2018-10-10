@@ -56,6 +56,7 @@
 		B596BF84216D99D00018CEB6 /* MALocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF82216D99D00018CEB6 /* MALocationAnnotation.m */; };
 		B596BF87216D99DC0018CEB6 /* MALocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF86216D99DC0018CEB6 /* MALocationAnnotationView.m */; };
 		B596BF8A216DA4480018CEB6 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF89216DA4480018CEB6 /* POIAnnotation.m */; };
+		B596BF8D216DB9EC0018CEB6 /* YDCelloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BF8B216DB9EC0018CEB6 /* YDCelloutView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,8 @@
 		B596BF86216D99DC0018CEB6 /* MALocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MALocationAnnotationView.m; sourceTree = "<group>"; };
 		B596BF88216DA4480018CEB6 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		B596BF89216DA4480018CEB6 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		B596BF8B216DB9EC0018CEB6 /* YDCelloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDCelloutView.m; sourceTree = "<group>"; };
+		B596BF8C216DB9EC0018CEB6 /* YDCelloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDCelloutView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,6 +363,8 @@
 		B596BF80216D99BD0018CEB6 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				B596BF8C216DB9EC0018CEB6 /* YDCelloutView.h */,
+				B596BF8B216DB9EC0018CEB6 /* YDCelloutView.m */,
 				B596BF85216D99DC0018CEB6 /* MALocationAnnotationView.h */,
 				B596BF86216D99DC0018CEB6 /* MALocationAnnotationView.m */,
 			);
@@ -469,6 +474,7 @@
 				B596BEF0216C84800018CEB6 /* BBDeputyList.m in Sources */,
 				B596BEB6216B50330018CEB6 /* ViewController.m in Sources */,
 				B596BEE9216B9C410018CEB6 /* BBMovieList.m in Sources */,
+				B596BF8D216DB9EC0018CEB6 /* YDCelloutView.m in Sources */,
 				B596BE90216B34720018CEB6 /* main.m in Sources */,
 				B596BF0C216CB0030018CEB6 /* BBMapViewController.m in Sources */,
 				B596BEC7216B62890018CEB6 /* BBMainViewController.m in Sources */,

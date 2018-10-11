@@ -59,6 +59,8 @@
 		B596BF91216DEA5C0018CEB6 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B596BF90216DEA5B0018CEB6 /* AMapLocationKit.framework */; };
 		B596BF9C216DEE1F0018CEB6 /* start@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B596BF9A216DEE1E0018CEB6 /* start@3x.png */; };
 		B596BF9D216DEE1F0018CEB6 /* start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B596BF9B216DEE1E0018CEB6 /* start@2x.png */; };
+		B596BFAB216F1D5F0018CEB6 /* BBRetureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BFAA216F1D5F0018CEB6 /* BBRetureViewController.m */; };
+		B596BFAE216F20930018CEB6 /* cccccccccc.m in Sources */ = {isa = PBXBuildFile; fileRef = B596BFAD216F20920018CEB6 /* cccccccccc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +136,10 @@
 		B596BF9A216DEE1E0018CEB6 /* start@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start@3x.png"; sourceTree = "<group>"; };
 		B596BF9B216DEE1E0018CEB6 /* start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start@2x.png"; sourceTree = "<group>"; };
 		B596BF9E216F18870018CEB6 /* BUBU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BUBU.entitlements; sourceTree = "<group>"; };
+		B596BFA9216F1D5F0018CEB6 /* BBRetureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBRetureViewController.h; sourceTree = "<group>"; };
+		B596BFAA216F1D5F0018CEB6 /* BBRetureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBRetureViewController.m; sourceTree = "<group>"; };
+		B596BFAC216F20920018CEB6 /* UITextView+YLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+YLTextView.h"; sourceTree = "<group>"; };
+		B596BFAD216F20920018CEB6 /* cccccccccc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cccccccccc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +224,8 @@
 		B596BE97216B48C30018CEB6 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				B596BFAC216F20920018CEB6 /* UITextView+YLTextView.h */,
+				B596BFAD216F20920018CEB6 /* cccccccccc.m */,
 				B596BEBA216B507C0018CEB6 /* UIViewController+Extension.h */,
 				B596BEBB216B507C0018CEB6 /* UIViewController+Extension.m */,
 				B596BEB8216B50640018CEB6 /* UIBarButtonItem+Extension.h */,
@@ -245,6 +253,8 @@
 				B596BEB5216B50330018CEB6 /* ViewController.m */,
 				B596BEEA216BA33F0018CEB6 /* BBMovieDetialController.h */,
 				B596BEEB216BA33F0018CEB6 /* BBMovieDetialController.m */,
+				B596BFA9216F1D5F0018CEB6 /* BBRetureViewController.h */,
+				B596BFAA216F1D5F0018CEB6 /* BBRetureViewController.m */,
 			);
 			path = vc;
 			sourceTree = "<group>";
@@ -495,10 +505,12 @@
 				B596BF0C216CB0030018CEB6 /* BBMapViewController.m in Sources */,
 				B596BEC7216B62890018CEB6 /* BBMainViewController.m in Sources */,
 				B596BEDD216B8D870018CEB6 /* BBScrollerCell.m in Sources */,
+				B596BFAE216F20930018CEB6 /* cccccccccc.m in Sources */,
 				B596BEBC216B507D0018CEB6 /* UIViewController+Extension.m in Sources */,
 				B596BF8A216DA4480018CEB6 /* POIAnnotation.m in Sources */,
 				B596BE82216B34700018CEB6 /* AppDelegate.m in Sources */,
 				B596BF84216D99D00018CEB6 /* MALocationAnnotation.m in Sources */,
+				B596BFAB216F1D5F0018CEB6 /* BBRetureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

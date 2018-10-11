@@ -17,6 +17,7 @@
 #import "UIViewController+Extension.h"
 #import "UIBarButtonItem+Extension.h"
 #import "BBMapViewController.h"
+#import "BBRetureViewController.h"
 
 @interface BBMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -51,6 +52,7 @@
     [self.view addSubview:_tableView];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(mapClick) title:@"观影"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(ticklingClick) title:@"反馈"];
 }
 
 - (void)mapClick
@@ -58,6 +60,15 @@
     BBMapViewController *mapVC = [[BBMapViewController alloc] init];
     mapVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:mapVC animated:YES completion:^{
+        
+    }];
+}
+
+- (void)ticklingClick
+{
+    BBRetureViewController *vc = [[BBRetureViewController alloc] init];
+//    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:vc animated:YES completion:^{
         
     }];
 }

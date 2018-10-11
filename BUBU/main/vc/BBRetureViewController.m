@@ -54,7 +54,7 @@
     _suggestTV.layer.cornerRadius = 5;
     _suggestTV.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _suggestTV.layer.borderWidth = 1.0;
-    _suggestTV.limitLength = @30;
+    _suggestTV.limitLength = @60;
     _suggestTV.placeholder = @"请输入您的反馈内容";
     _suggestTV.placeholdColor = [UIColor lightGrayColor];
     _suggestTV.limitPlaceColor = [UIColor lightGrayColor];

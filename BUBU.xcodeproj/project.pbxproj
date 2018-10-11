@@ -133,6 +133,7 @@
 		B596BF90216DEA5B0018CEB6 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
 		B596BF9A216DEE1E0018CEB6 /* start@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start@3x.png"; sourceTree = "<group>"; };
 		B596BF9B216DEE1E0018CEB6 /* start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start@2x.png"; sourceTree = "<group>"; };
+		B596BF9E216F18870018CEB6 /* BUBU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BUBU.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +189,7 @@
 		B596BE7F216B34700018CEB6 /* BUBU */ = {
 			isa = PBXGroup;
 			children = (
+				B596BF9E216F18870018CEB6 /* BUBU.entitlements */,
 				B596BF08216CAFC90018CEB6 /* BBMap */,
 				B596BEC0216B61C40018CEB6 /* BBTwoVC */,
 				B596BE9E216B4D700018CEB6 /* main */,
@@ -422,6 +424,12 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.HealthKit = {
+								enabled = 0;
 							};
 						};
 					};

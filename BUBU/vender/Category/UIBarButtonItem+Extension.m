@@ -66,7 +66,7 @@
     CGRect frame;
     frame = btn.frame;
     frame.size.height = 30;
-    frame.size.width = 40;
+    frame.size.width = 80;
     btn.frame = frame;
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
